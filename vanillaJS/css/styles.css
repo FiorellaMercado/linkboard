@@ -1,0 +1,13 @@
+.button {
+  color: gray;
+  background:none;
+  border: none;
+  cursor: pointer
+}
+
+.button.liked {
+  color: red;
+  background:none;
+  border: none;
+  cursor: pointer
+}
