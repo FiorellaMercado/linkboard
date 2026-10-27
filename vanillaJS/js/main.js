@@ -10,7 +10,6 @@ const lista = document.getElementById('lista')
 let votados = new Set();
 try{
     const respuesta= JSON.parse(localStorage.getItem('votados'))
-    console.log(respuesta)
     if(respuesta){
         votados=new Set(respuesta)
     }
@@ -25,7 +24,6 @@ function render(){
 async function manejarVoto(link, boton){
     try{
         const voto = votados.has(link.id) ? -1:1;
-        console.log(voto)
         boton.disabled= true
         const linkActualizado = await voteLink(link.id,voto)
         const indice= links.findIndex(item => item.id === link.id)
@@ -62,7 +60,6 @@ async function main(){
     try{
         links = await getLinks()
         render()
-        console.log(links)
 
     }catch(error){
         console.error(error)

@@ -35,7 +35,6 @@ export function renderLinks(contenedor, links, votados, onVote){
         url.href=link.url
         url.target='_blank'
         url.rel="noopener noreferrer"
-        console.log('lista:', link.tags);
         const etiquetas = crearEtiquetas('div','span', link.tags)
         const votos = crearElemento('span', link.votes)
         const votar = crearElemento('button','♡')
