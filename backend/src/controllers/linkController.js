@@ -2,7 +2,7 @@ const {prisma} = require('../config/bd')
 const { isValidString, isValidURL, isValidTags, normalizeTags, isValidId } = require('../utils/validators')
 
 const listLinks= async (req,res) => {
-    const links= await prisma.link.findMany()
+    const links= await prisma.link.findMany({include:{tags:true}})
     res.json(links)
 }
 
@@ -89,7 +89,7 @@ const voteLink= async (req,res) => {
         return res.status(422).json({error: "Accion no permitida. No se puede descontar voto"})              
     }
     const votoCalculo= Number(link.votes)+voto
-    const linkActualizado = await prisma.link.update({where:{id:Number(id)}, data:{votes:votoCalculo}})
+    const linkActualizado = await prisma.link.update({where:{id:Number(id)}, data:{votes:votoCalculo}, include:{tags:true}})
     res.status(200).json(linkActualizado)
 }
 
