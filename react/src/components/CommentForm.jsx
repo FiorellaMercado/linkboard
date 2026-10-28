@@ -1,19 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-function CommentForm() {
+function CommentForm({onSubmit, enviando}) {
   return (
     <div className='lista'>
         <p></p>
-        <form className="" action="">
+        <form onSubmit={(e)=>onSubmit(e)}  className="" action="">
             <div>
                 <label htmlFor="autor">Nombre: </label>
-                <input id="autor" type="text" />
+                <input id="autor" name='autor' type="text" />
             </div>
             <div>
                 <label htmlFor="texto"> Comentario: </label>
-                <input id="texto" type="text" />                
+                <input id="texto" name='texto' type="text"/>                
             </div>
-            <button type="submit">Enviar</button>
+            <button type="submit" disabled = {enviando}>{enviando ? "Enviando..." : "Enviar"}</button>
         </form>
     </div>
   )

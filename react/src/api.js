@@ -42,3 +42,8 @@ export async function getDetails(id) {
     const detalle = await apiGET(`enlaces/${id}/detalle`)
     return detalle
 }
+
+export async function addComment(id, datos) {
+    const comentario = await apiRequest(`enlaces/${id}/comentarios`, 'POST', datos)
+    return comentario
+}
