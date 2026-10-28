@@ -37,3 +37,8 @@ export async function voteLink(id, vote){
     return voto
 
 }
+
+export async function getDetails(id) {
+    const detalle = await apiGET(`enlaces/${id}/detalle`)
+    return detalle
+}

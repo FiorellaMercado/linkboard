@@ -2,6 +2,7 @@ import { getLinks, voteLink } from './api';
 import './App.css'
 import { useState, useEffect} from 'react'
 import LinkList from './components/LinkList';
+import LinkDetail from './components/LinkDetail';
 
 function leerVotados(){
   try{
@@ -21,7 +22,8 @@ function App() {
   const [error, setError] = useState(null);
   const [errorVoto, setErrorVoto]= useState(null);
   const [votados, setVotados]=useState(leerVotados)
-
+  const [selected, setSelected] = useState(false)  //guarda el id
+  console.log(selected)
 
   
   useEffect(()=>{
@@ -38,6 +40,17 @@ function App() {
     cargar();
 
   },[])
+
+  function seleccionarDetalle(id){
+    try{
+      setCargando(true)
+      setSelected(id)
+    }catch(e){
+      setError(e.message)
+    }finally{
+      setCargando(false)
+    }
+  }
 
   function guardarVotos(nuevoVotados){
     try{
@@ -82,7 +95,10 @@ function App() {
       {errorVoto ?<p>Error {errorVoto}</p> : null}
 
       <h1>Enlaces</h1>
-      <LinkList links={links} onVote={manejarVoto} votados={votados} onSelect='s'/>      
+      {
+        selected ? <LinkDetail link={links.find(link=>link.id===selected)} onVote={manejarVoto} votado={votados}/> : 
+        <LinkList links={links} onVote={manejarVoto} votados={votados} onSelect={seleccionarDetalle}/>
+      }   
       
     </>
   )

@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function LinkCard({ link, onVote, votado}){
+function LinkCard({ link, onVote, votado,   onSelect}){
     const tags= link.tags
     const [disable, setDisable] = useState(false)
 
@@ -26,6 +26,7 @@ function LinkCard({ link, onVote, votado}){
             </div>
             <span>{link.votes} </span>
             <button onClick={votando} title="Votar" disabled={disable} className={votado ? "liked" : "disliked"}>♡</button>
+            <button onClick={()=>onSelect(link.id)} aria-label="Ver detalle de este enlace">Ver Detalle</button>
         </div>
     )
 
