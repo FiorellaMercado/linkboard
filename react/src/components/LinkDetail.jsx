@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react"
 import { getDetails } from "../api";
 import CommentList from "./CommentList";
+import CommentForm from "./CommentForm";
 
 function LinkDetail({link, onVote,votado}) {
     const [comentarios, setComentarios]=useState([])
@@ -55,6 +56,8 @@ function LinkDetail({link, onVote,votado}) {
         
         <h2>{comentarios.length? "Comentarios":null}</h2>
         <CommentList comments={comentarios}/>
+
+        <CommentForm/>
     </>
 
 
