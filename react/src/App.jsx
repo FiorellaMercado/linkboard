@@ -39,9 +39,9 @@ function App() {
 
   },[])
 
-  function guardarVotos(){
+  function guardarVotos(nuevoVotados){
     try{
-      localStorage.setItem('votados', JSON.stringify([...votados]))
+      localStorage.setItem('votados', JSON.stringify([...nuevoVotados]))
     }catch{
 
     }
@@ -61,6 +61,7 @@ function App() {
       const nuevoVotados= new Set(votados)
       valor===1 ? nuevoVotados.add(id) : nuevoVotados.delete(id) 
       setVotados(nuevoVotados)
+      guardarVotos(nuevoVotados)
 
 
     }catch(e){
