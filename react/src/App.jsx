@@ -3,7 +3,16 @@ import './App.css'
 import LinkCard from './components/LinkCard'
 import { useState, useEffect} from 'react'
 
-
+function leerVotados(){
+  try{
+    const storage = localStorage.getItem('votados')
+    const arrayVotados= JSON.parse(storage)
+    const votadosSet = new Set(arrayVotados)
+    return votadosSet
+  }catch{
+    return new Set() 
+  }
+}
 
 function App() {
 
@@ -11,6 +20,8 @@ function App() {
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
   const [errorVoto, setErrorVoto]= useState(null);
+  const [votados, setVotados]=useState(leerVotados)
+
 
   
   useEffect(()=>{
@@ -28,10 +39,29 @@ function App() {
 
   },[])
 
+  function guardarVotos(){
+    try{
+      localStorage.setItem('votados', JSON.stringify([...votados]))
+    }catch{
+
+    }
+  }
   async function manejarVoto(id){
     try{
-      const linkActualizado=await voteLink(id, 1)
+      setErrorVoto(null)
+      let valor
+      if(votados.has(id)){
+        valor=-1
+      }else{
+        valor=1
+      }
+      
+      const linkActualizado=await voteLink(id, valor)
       setLinks(lista => lista.map(link=> link.id===id ? {...link,votes: linkActualizado.votes} : link))
+      const nuevoVotados= new Set(votados)
+      valor===1 ? nuevoVotados.add(id) : nuevoVotados.delete(id) 
+      setVotados(nuevoVotados)
+
 
     }catch(e){
       setErrorVoto(e.message)
@@ -54,7 +84,7 @@ function App() {
 
       { links.map(link=>{
           return(
-            <LinkCard key={link.id} link={link} onVote={manejarVoto}/>
+            <LinkCard key={link.id} link={link} onVote={manejarVoto} votado={votados.has(link.id)}/>
           )
         })
       }

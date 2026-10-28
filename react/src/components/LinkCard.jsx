@@ -1,6 +1,17 @@
+import { useState } from "react"
 
-function LinkCard({ link, onVote}){
+function LinkCard({ link, onVote, votado}){
     const tags= link.tags
+    const [disable, setDisable] = useState(false)
+
+    async function votando(){
+        setDisable(true)
+        try{
+            await onVote(link.id)
+        }finally{
+            setDisable(false)
+        }
+    }
     return(
         <div>
             <p>{link.title}</p>
@@ -14,7 +25,7 @@ function LinkCard({ link, onVote}){
                 })}
                 
             </div>
-            <button onClick={()=>onVote(link.id)}>Votar</button>
+            <button onClick={votando} disabled={disable} className={votado ? "liked" : "disliked"}>♡</button>
         </div>
     )
 
