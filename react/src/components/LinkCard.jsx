@@ -13,19 +13,19 @@ function LinkCard({ link, onVote, votado}){
         }
     }
     return(
-        <div>
-            <p>{link.title}</p>
-            <a href={link.url} target="_blank" rel="noopener noreferrer">{link.url} </a>
-            <p>Votos: {link.votes} </p>
-            <div>
+        <div className="card"> 
+            <p className="titulo">{link.title}</p>
+            <a href={link.url} target="_blank" rel="noopener noreferrer">{link.url} </a>        
+            <div className="tagCard">
                 {tags.map(tag=>{
                     return(
-                        <span key={tag.id}>{tag.name}</span>
+                        <span key={tag.id} className="tag">{tag.name}</span>
                     )
                 })}
                 
             </div>
-            <button onClick={votando} disabled={disable} className={votado ? "liked" : "disliked"}>♡</button>
+            <span>{link.votes} </span>
+            <button onClick={votando} title="Votar" disabled={disable} className={votado ? "liked" : "disliked"}>♡</button>
         </div>
     )
 

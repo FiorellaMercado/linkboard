@@ -114,12 +114,52 @@ code {
   color: gray;
   background:none;
   border: none;
-  cursor: pointer
+  cursor: pointer;
+  font-size:large;
 }
 
 .liked {
   color: red;
   background:none;
   border: none;
-  cursor: pointer
+  cursor: pointer;
+  font-size:large;
+}
+
+.card{
+ background-color: #ebedf0;
+ border-radius: 4px;
+ padding: 10px;
+}
+.card a {
+  overflow-wrap: anywhere;
+}
+
+.lista{
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+}
+
+.tag{
+  background-color: #08060d;
+  border-radius: 8px;
+  padding-inline: 6px;
+  padding-block: 0px;
+  color: #fff;
+  font-size: x-small;
+}
+.tagCard{
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  padding: 4px;
+  margin-bottom: 10px;
+}
+
+.titulo{
+  font-weight: bold;
+  color: #08060d;
+  padding-bottom: 12px;
 }

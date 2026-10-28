@@ -81,14 +81,16 @@ function App() {
       
       {errorVoto ?<p>Error {errorVoto}</p> : null}
 
-      <h1>Lista</h1>
-
-      { links.map(link=>{
-          return(
-            <LinkCard key={link.id} link={link} onVote={manejarVoto} votado={votados.has(link.id)}/>
-          )
-        })
-      }
+      <h1>Enlaces</h1>
+      <section className='lista'>
+        { links.map(link=>{
+            return(
+              <LinkCard key={link.id} link={link} onVote={manejarVoto} votado={votados.has(link.id)}/>
+            )
+          })
+        }
+      </section>
+      
       
     </>
   )
