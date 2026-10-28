@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react"
 import { getDetails } from "../api";
+import CommentList from "./CommentList";
 
 function LinkDetail({link, onVote,votado}) {
     const [comentarios, setComentarios]=useState([])
@@ -21,6 +22,7 @@ function LinkDetail({link, onVote,votado}) {
         async function cargarDetalle() {
             try{
                 const datos= await getDetails(link.id)
+                console.log(datos)
                 setComentarios([...datos.comments])
             }catch(e){
                 setError(e.message)
@@ -39,12 +41,24 @@ function LinkDetail({link, onVote,votado}) {
     }
   return (
 
-    <div className="card">
-        <p className="titulo" >{link.title}</p>
-        <a href={link.url} target="_blank" rel="noopener noreferrer">{link.url}</a>
-        <span>{link.votes} </span>
-        <button onClick={votando} title="Votar" disabled={disable} className={votado.has(link.id) ? "liked" : "disliked"}>♡</button>
-    </div>
+    <>
+        <h1>Detalle</h1>
+        <section className="lista">
+            <div className="card">
+            <p className="titulo" >{link.title}</p>
+            <a href={link.url} target="_blank" rel="noopener noreferrer">{link.url}</a>
+            <p></p>
+            <span>{link.votes} </span>
+            <button onClick={votando} title="Votar" disabled={disable} className={votado.has(link.id) ? "liked" : "disliked"}>♡</button>
+        </div>
+        </section>
+        
+        <h2>{comentarios.length? "Comentarios":null}</h2>
+        <CommentList comments={comentarios}/>
+    </>
+
+
+
   )
 }
 

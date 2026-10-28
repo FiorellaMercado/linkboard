@@ -94,7 +94,6 @@ function App() {
       
       {errorVoto ?<p>Error {errorVoto}</p> : null}
 
-      <h1>Enlaces</h1>
       {
         selected ? <LinkDetail link={links.find(link=>link.id===selected)} onVote={manejarVoto} votado={votados}/> : 
         <LinkList links={links} onVote={manejarVoto} votados={votados} onSelect={seleccionarDetalle}/>
