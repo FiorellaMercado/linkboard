@@ -1,12 +1,11 @@
-import { useState } from "react"
-function LinkCard({ link}){
-    const [voto, setVoto]=useState(link.votes);
+
+function LinkCard({ link, onVote}){
     return(
         <div>
             <p>{link.title}</p>
             <a href={link.url} target="_blank" rel="noopener noreferrer">{link.url} </a>
-            <p>Votos: {voto} </p>
-            <button onClick={()=> setVoto(votoActual=>votoActual+1)}>Votar</button>
+            <p>Votos: {link.votes} </p>
+            <button onClick={()=>onVote(link.id)}>Votar</button>
         </div>
     )
 
