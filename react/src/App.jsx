@@ -1,7 +1,7 @@
 import { getLinks, voteLink } from './api';
 import './App.css'
-import LinkCard from './components/LinkCard'
 import { useState, useEffect} from 'react'
+import LinkList from './components/LinkList';
 
 function leerVotados(){
   try{
@@ -82,15 +82,7 @@ function App() {
       {errorVoto ?<p>Error {errorVoto}</p> : null}
 
       <h1>Enlaces</h1>
-      <section className='lista'>
-        { links.map(link=>{
-            return(
-              <LinkCard key={link.id} link={link} onVote={manejarVoto} votado={votados.has(link.id)}/>
-            )
-          })
-        }
-      </section>
-      
+      <LinkList links={links} onVote={manejarVoto} votados={votados} onSelect='s'/>      
       
     </>
   )
