@@ -26,7 +26,7 @@ function App() {
   const [cargandoNuevo, setCargandoNuevo]=useState(false)
   const [errorNuevo,setErrorNuevo]=useState(null)
   const [tagActivo, setTagActivo]=useState(null)
-  console.log(selected)
+
 
   
   useEffect(()=>{
@@ -53,7 +53,7 @@ function App() {
   }
 
   function seleccionarTag(tag){
-    console.log(tag)
+  
     setTagActivo(tag)
   }
 

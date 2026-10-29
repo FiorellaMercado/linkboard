@@ -45,7 +45,6 @@ function LinkDetail({link, onVote,votado,onBack}) {
         async function cargarDetalle() {
             try{
                 const datos= await getDetails(link.id)
-                console.log(datos)
                 setComentarios([...datos.comments])
             }catch(e){
                 setError(e.message)

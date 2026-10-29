@@ -1,7 +1,7 @@
 import React from 'react'
 
 function TagFilter({listaTags, tagActivo, onSelect}) {
-    console.log(tagActivo)
+    
   return (
     <>
         <div className='tagCard'>
