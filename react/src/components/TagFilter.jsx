@@ -7,12 +7,12 @@ function TagFilter({listaTags, tagActivo, onSelect}) {
         <div className='tagCard'>
             {listaTags.map(tag=>{
                 return(
-                    <button  onClick={()=>onSelect(tag.name)}  key={tag.id} className={tagActivo===tag.name?'tagSelect':'tag'}>
-                        {tag.name}
+                    <button  onClick={()=>onSelect(tag)}  key={tag} className={tagActivo===tag?'tagSelect':'tag'}>
+                        {tag}
                     </button>
                 )
             })}
-            <button onClick={()=>onSelect('Todos')} className={tagActivo==='Todos'?'tagSelect':'tag'}>Todos</button>
+            <button onClick={()=>onSelect(null)} className={!tagActivo?'tagSelect':'tag'}>Todos</button>
         </div>
     </>
 
