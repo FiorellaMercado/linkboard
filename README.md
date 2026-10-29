@@ -91,3 +91,7 @@ Esta app no esta desplegada, pero si guisiera hacerlo
 
 - SPA: el cambio entre lista y detalle se hace con estado de React, sin recargar. El botón "atrás" del navegador no vuelve de detalle a lista.
 - Los votos "ya votados" se recuerdan por navegador (localStorage), no por usuario.
+
+npm install -D prisma
+npm install @prisma/client
+npx prisma generate --config prisma7.config.ts
