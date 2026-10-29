@@ -3,6 +3,7 @@ import { useState } from "react"
 import { addComment, getDetails } from "../api";
 import CommentList from "./CommentList";
 import CommentForm from "./CommentForm";
+import { formatearFecha } from "../utils";
 
 function LinkDetail({link, onVote,votado,onBack}) {
     const [comentarios, setComentarios]=useState([])
@@ -68,7 +69,7 @@ function LinkDetail({link, onVote,votado,onBack}) {
         <section className="lista">
             <div className="card">
             <p className="titulo" >{link.title}</p>
-            <p>{link.createdAt}</p>
+            <p className="fecha">{formatearFecha(link.createdAt)}</p>
             <a href={link.url} target="_blank" rel="noopener noreferrer">{link.url}</a>
             <div className="tagCard">
                 {tags.map(tag=>{
