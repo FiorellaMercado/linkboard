@@ -3,6 +3,7 @@ import './App.css'
 import { useState, useEffect} from 'react'
 import LinkList from './components/LinkList';
 import LinkDetail from './components/LinkDetail';
+import LinkForm from './components/LinkForm';
 
 function leerVotados(){
   try{
@@ -117,12 +118,27 @@ function App() {
 
       {
         selected ? 
-        <LinkDetail link={links.find(link=>link.id===selected)} 
-          onVote={manejarVoto} votado={votados} onBack={volver}/> : 
-        <LinkList links={links} onVote={manejarVoto} votados={votados} 
-         onSelect={seleccionarDetalle} onCreate={manejarLink} 
-         creando={cargandoNuevo} errorCreando={errorNuevo}
-         onSelectTag={seleccionarTag} tagActivo={tagActivo}/>
+          <LinkDetail link={links.find(link=>link.id===selected)} 
+            onVote={manejarVoto} 
+            votado={votados} 
+            onBack={volver}
+          /> 
+        : 
+          <LinkList 
+            links={links} 
+            onVote={manejarVoto} 
+            votados={votados} 
+            onSelect={seleccionarDetalle} 
+            onSelectTag={seleccionarTag} 
+            tagActivo={tagActivo}
+          >
+            <LinkForm
+              onCreate={manejarLink}
+              creando={cargandoNuevo} 
+            />
+            {errorNuevo ? <p>{errorNuevo}</p> : null}
+
+          </LinkList>
       }   
       
     </>

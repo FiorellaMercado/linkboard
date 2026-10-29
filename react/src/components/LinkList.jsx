@@ -1,10 +1,9 @@
 
 import LinkCard from './LinkCard'
-import LinkForm from './LinkForm'
 import TagFilter from './TagFilter'
 
 
-function LinkList({links,onVote,votados,onSelect, onCreate, creando, errorCreando, onSelectTag, tagActivo}) {
+function LinkList({links,onVote,votados,onSelect, onSelectTag, tagActivo, children}) {
   const lista=links.filter(link=>link.tags.length)
   const listaArray=lista.map(link=>link.tags)
   const listaObjetos= listaArray.flat()
@@ -19,8 +18,7 @@ function LinkList({links,onVote,votados,onSelect, onCreate, creando, errorCreand
   return (
     <>
       <h1>Enlaces</h1>
-      <LinkForm onCreate={onCreate} creando={creando}/>
-      {errorCreando ? errorCreando: null}
+      {children}      
       <TagFilter listaTags={listaTags} onSelect={onSelectTag} tagActivo={tagActivo}/>
       <section className='lista'>
         { (tagActivo?listafiltrada:links).map(link=>{
