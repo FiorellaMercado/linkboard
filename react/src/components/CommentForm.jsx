@@ -13,8 +13,8 @@ function CommentForm({onSubmit, enviando}) {
         e.target.reset()
     }
   return (
-    <div className='lista'>
-        <p></p>
+    <div className='card'>
+        <p className='titulo'>Deja tu comentario</p>
         <form onSubmit={(e)=>enviarForm(e)}  className="" action="">
             <div>
                 <label htmlFor="autor">Nombre: </label>

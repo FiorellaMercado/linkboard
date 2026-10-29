@@ -25,9 +25,12 @@ function LinkCard({ link, onVote, votado,   onSelect}){
                 })}
                 
             </div>
-            <span>{link.votes} </span>
-            <VoteButton votando={votando} disabled={disable} votado={votado}/>
-            <button onClick={()=>onSelect(link.id)} aria-label="Ver detalle de este enlace">Ver Detalle</button>
+            
+            <div className="contenedorFlexVoto">
+                <span>{link.votes} </span>
+                <VoteButton votando={votando} disabled={disable} votado={votado}/>
+                <button onClick={()=>onSelect(link.id)} aria-label="Ver detalle de este enlace" className="detalle">Ver Detalle</button>
+            </div>
         </div>
     )
 

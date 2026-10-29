@@ -182,3 +182,47 @@ code {
   font-size: small;
 
 }
+.atras{
+  background-color: #08060d;
+  border-radius: 8px;
+  padding: 6px;
+  color: #fff;
+  font-size: large;
+  border-width: 0px;
+  justify-content: start;
+
+}
+.atras:hover {
+  background-color: #483d5c;
+}
+
+.contenedorFlex{
+  display: flex;
+  padding-inline: 24px;
+}
+
+.detalle{
+  background-color:transparent;
+  border-radius: 8px;
+  border-color: #08060d;
+  padding: 6px;
+  color: black;
+  font-size: small;
+  border-width: 1px;
+  justify-content: start;
+  margin-left: 24px;
+}
+.contenedorFlexVoto{
+  display: flex;
+  padding-inline: 24px;
+  justify-content: center;
+  padding-top: 6px;
+}
+
+button.tag,
+button.tagSelect {
+  font-family: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  cursor: pointer;
+}

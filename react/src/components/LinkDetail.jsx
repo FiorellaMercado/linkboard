@@ -66,7 +66,10 @@ function LinkDetail({link, onVote,votado,onBack}) {
   return (
 
     <>
-        <button className='atras' onClick={onBack}>Volver</button>
+        
+        <div className="contenedorFlex">
+            <button className='atras' onClick={onBack}>Volver</button>
+        </div>
         <h1>Detalle</h1>
         <section className="lista">
             <div className="card">
@@ -84,13 +87,15 @@ function LinkDetail({link, onVote,votado,onBack}) {
             <p>{link.description}</p>
             <span>{link.votes} </span>
             <VoteButton votando={votando} disabled={disable} votado={votado.has(link.id)}/>
-        </div>
+            </div>
         </section>
         
         <h2>{comentarios.length? "Comentarios":null}</h2>
         <CommentList comments={comentarios}/>
+        <div className="lista">
+            <CommentForm onSubmit={manejarComentario} enviando={enviando}/>
 
-        <CommentForm onSubmit={manejarComentario} enviando={enviando}/>
+        </div>
         {errorComentar ? errorComentar: null}
 
         

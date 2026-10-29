@@ -7,11 +7,13 @@ function CommentList({comments}) {
   return (
 
     <>
+        <div className='lista'> 
         {comments.map(comment=>{
             return(
                 <CommentCard key={comment.id} comment={comment}/>
             )
         })}
+        </div>
         
     </>
     
