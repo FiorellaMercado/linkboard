@@ -47,3 +47,8 @@ export async function addComment(id, datos) {
     const comentario = await apiRequest(`enlaces/${id}/comentarios`, 'POST', datos)
     return comentario
 }
+
+export async function addLink(datos) {
+    const link = await apiRequest('enlaces','POST', datos)
+    return link
+}

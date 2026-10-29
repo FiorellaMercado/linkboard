@@ -1,4 +1,4 @@
-import { getLinks, voteLink } from './api';
+import { addLink, getLinks, voteLink } from './api';
 import './App.css'
 import { useState, useEffect} from 'react'
 import LinkList from './components/LinkList';
@@ -22,7 +22,9 @@ function App() {
   const [error, setError] = useState(null);
   const [errorVoto, setErrorVoto]= useState(null);
   const [votados, setVotados]=useState(leerVotados)
-  const [selected, setSelected] = useState(false)  //guarda el id
+  const [selected, setSelected] = useState(null)  //guarda el id
+  const [cargandoNuevo, setCargandoNuevo]=useState(false)
+  const [errorNuevo,setErrorNuevo]=useState(null)
   console.log(selected)
 
   
@@ -42,14 +44,11 @@ function App() {
   },[])
 
   function seleccionarDetalle(id){
-    try{
-      setCargando(true)
-      setSelected(id)
-    }catch(e){
-      setError(e.message)
-    }finally{
-      setCargando(false)
-    }
+    setSelected(id)
+  }
+
+  function volver(){
+    setSelected(null)
   }
 
   function guardarVotos(nuevoVotados){
@@ -82,6 +81,21 @@ function App() {
     }
   }
 
+    async function manejarLink(datos){
+      console.log(datos)
+      try{
+        setErrorNuevo(null)
+        setCargandoNuevo(true)
+        const nuevoLink= await addLink(datos)
+        setLinks(links=>[...links,nuevoLink])
+      }catch(e){
+        setErrorNuevo(e.message)
+      }finally{
+        setCargandoNuevo(false)
+      }
+
+    }
+
   if (cargando){
     return <p>Cargando...</p>
   }
@@ -95,8 +109,12 @@ function App() {
       {errorVoto ?<p>Error {errorVoto}</p> : null}
 
       {
-        selected ? <LinkDetail link={links.find(link=>link.id===selected)} onVote={manejarVoto} votado={votados}/> : 
-        <LinkList links={links} onVote={manejarVoto} votados={votados} onSelect={seleccionarDetalle}/>
+        selected ? 
+        <LinkDetail link={links.find(link=>link.id===selected)} 
+          onVote={manejarVoto} votado={votados} onBack={volver}/> : 
+        <LinkList links={links} onVote={manejarVoto} votados={votados} 
+         onSelect={seleccionarDetalle} onCreate={manejarLink} 
+         creando={cargandoNuevo} errorCreando={errorNuevo}/>
       }   
       
     </>

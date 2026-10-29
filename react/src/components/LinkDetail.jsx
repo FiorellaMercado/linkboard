@@ -4,13 +4,14 @@ import { addComment, getDetails } from "../api";
 import CommentList from "./CommentList";
 import CommentForm from "./CommentForm";
 
-function LinkDetail({link, onVote,votado}) {
+function LinkDetail({link, onVote,votado,onBack}) {
     const [comentarios, setComentarios]=useState([])
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState(null);
     const [enviando, setEnviando] = useState(false);
     const [errorComentar, setErrorComentar] = useState(null);
-    const [disable, setDisable] = useState(false)
+    const [disable, setDisable] = useState(false);
+    const tags=link.tags
 
 
     async function votando(){
@@ -21,22 +22,17 @@ function LinkDetail({link, onVote,votado}) {
             setDisable(false)
         }
     }
-    async function manejarComentario(e) {
-        e.preventDefault();
-
-        const autor = e.target.autor.value;
-        const texto = e.target.texto.value;
-
-        console.log(autor)
-        console.log(texto)
+    async function manejarComentario(datos) {
 
         try{
             setErrorComentar(null)
             setEnviando(true)
-            const comentarioNuevo= await addComment(link.id,{author: autor, text:texto})
+            const comentarioNuevo= await addComment(link.id,datos)
             const comentariosActualizado = [...comentarios, comentarioNuevo];
             setComentarios(comentariosActualizado)
-            e.target.reset()
+            // es mejor usar setComentarios(prev => [...prev, nuevo]), pero el boton deshabilitado impide que la otra forma cause error
+            // lo que pasa es que comentarios es el estado anterior cuando se renderizo, cambiara ese estado por otro lado
+            //la copia estaria desactualizada
         }catch(e){
             setErrorComentar(e.message)
         }finally{
@@ -73,8 +69,17 @@ function LinkDetail({link, onVote,votado}) {
         <section className="lista">
             <div className="card">
             <p className="titulo" >{link.title}</p>
+            <p>{link.createdAt}</p>
             <a href={link.url} target="_blank" rel="noopener noreferrer">{link.url}</a>
-            <p></p>
+            <div className="tagCard">
+                {tags.map(tag=>{
+                    return(
+                        <span key={tag.id} className="tag">{tag.name}</span>
+                    )
+                })}
+                
+            </div>
+            <p>{link.description}</p>
             <span>{link.votes} </span>
             <button onClick={votando} title="Votar" disabled={disable} className={votado.has(link.id) ? "liked" : "disliked"}>♡</button>
         </div>
@@ -85,6 +90,8 @@ function LinkDetail({link, onVote,votado}) {
 
         <CommentForm onSubmit={manejarComentario} enviando={enviando}/>
         {errorComentar ? errorComentar: null}
+
+        <button onClick={onBack}>Volver</button>
     </>
 
 
