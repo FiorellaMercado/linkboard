@@ -25,6 +25,7 @@ function App() {
   const [selected, setSelected] = useState(null)  //guarda el id
   const [cargandoNuevo, setCargandoNuevo]=useState(false)
   const [errorNuevo,setErrorNuevo]=useState(null)
+  const [tagActivo, setTagActivo]=useState(null)
   console.log(selected)
 
   
@@ -49,6 +50,11 @@ function App() {
 
   function volver(){
     setSelected(null)
+  }
+
+  function seleccionarTag(tag){
+    console.log(tag)
+    setTagActivo(tag)
   }
 
   function guardarVotos(nuevoVotados){
@@ -114,7 +120,8 @@ function App() {
           onVote={manejarVoto} votado={votados} onBack={volver}/> : 
         <LinkList links={links} onVote={manejarVoto} votados={votados} 
          onSelect={seleccionarDetalle} onCreate={manejarLink} 
-         creando={cargandoNuevo} errorCreando={errorNuevo}/>
+         creando={cargandoNuevo} errorCreando={errorNuevo}
+         onSelectTag={seleccionarTag} tagActivo={tagActivo}/>
       }   
       
     </>

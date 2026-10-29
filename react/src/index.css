@@ -151,6 +151,17 @@ code {
   padding-block: 0px;
   color: #fff;
   font-size: x-small;
+  border-width: 0px;
+}
+.tagSelect{
+  background-color: #fff;
+  border-radius: 8px;
+  padding-inline: 6px;
+  padding-block: 0px;
+  color:  #08060d;
+  font-size: x-small;
+  border-color: #08060d;
+  border-width: 1px;
 }
 .tagCard{
   display: flex;
