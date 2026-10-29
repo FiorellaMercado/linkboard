@@ -94,6 +94,7 @@ function App() {
         setCargandoNuevo(true)
         const nuevoLink= await addLink(datos)
         setLinks(links=>[...links,nuevoLink])
+        setTagActivo(null)
       }catch(e){
         setErrorNuevo(e.message)
       }finally{
