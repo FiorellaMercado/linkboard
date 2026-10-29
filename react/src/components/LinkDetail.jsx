@@ -4,6 +4,7 @@ import { addComment, getDetails } from "../api";
 import CommentList from "./CommentList";
 import CommentForm from "./CommentForm";
 import { formatearFecha } from "../utils";
+import VoteButton from "./VoteButton";
 
 function LinkDetail({link, onVote,votado,onBack}) {
     const [comentarios, setComentarios]=useState([])
@@ -65,6 +66,7 @@ function LinkDetail({link, onVote,votado,onBack}) {
   return (
 
     <>
+        <button className='atras' onClick={onBack}>Volver</button>
         <h1>Detalle</h1>
         <section className="lista">
             <div className="card">
@@ -81,7 +83,7 @@ function LinkDetail({link, onVote,votado,onBack}) {
             </div>
             <p>{link.description}</p>
             <span>{link.votes} </span>
-            <button onClick={votando} title="Votar" disabled={disable} className={votado.has(link.id) ? "liked" : "disliked"}>♡</button>
+            <VoteButton votando={votando} disabled={disable} votado={votado.has(link.id)}/>
         </div>
         </section>
         
@@ -91,7 +93,7 @@ function LinkDetail({link, onVote,votado,onBack}) {
         <CommentForm onSubmit={manejarComentario} enviando={enviando}/>
         {errorComentar ? errorComentar: null}
 
-        <button onClick={onBack}>Volver</button>
+        
     </>
 
 
